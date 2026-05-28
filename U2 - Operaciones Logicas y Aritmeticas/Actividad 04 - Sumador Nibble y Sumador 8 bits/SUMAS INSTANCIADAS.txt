@@ -1,0 +1,34 @@
+SUMAS INSTANCIADAS
+
+HALF ADDER
+module M_HA1 (input e1, input e2, output s, output A);
+assign A = e1 & e2;
+assign s = e1 ^ e2;
+endmodule
+
+
+FULL ADDER
+module full_adder(input a, input b, input ae, output sum, output as);
+wire c1,c2,c3;
+M_HA1 h1(.e1(a),.e2(b),.s(c1),.A(c2));
+M_HA2 h2(.e1(c1),.C(ae),.s(sum),.A(c3));
+assign as = c2 | c3;
+endmodule
+
+
+SUMADOR 4 BITS
+module M_inst4b (input [3:0] A, input [3:0] B, input Cin, output [4:0] C);
+wire c1, c2, c3;
+FA fa0 (.e1(A[0]), .e2(B[0]), .ae(Cin), .sum(C[0]), .as(c1));
+FA fa1 (.e1(A[1]), .e2(B[1]), .ae(c1), .sum(C[1]), .as(c2));
+FA fa2 (.e1(A[2]), .e2(B[2]), .ae(c2), .sum(C[2]), .as(c3));
+FA fa3 (.e1(A[3]), .e2(B[3]), .ae(c3), .sum(C[3]), .as(C[4]));
+endmodule
+
+
+SUMADOR 8 BITS
+module M_ins8b (input [7:0] A, input [7:0] B, output [8:0] C);
+wire c1;
+M_ins4b (.A(A[3:0]), .B(B[3:0]), .Cin(1'b0), .C({c1, C[3:0]}));
+M_ins4b (.A(A[7:4]), .B(B[7:4]), .Cin(c1), .C(C[8:4]));
+endmodule

@@ -1,0 +1,55 @@
+SUMAS COMPORTAMENTAL
+
+SUMADOR 4 BITS
+module M_S4 (input [3:0] A, input [3:0] B, input Cin, output [4:0] C);
+assign C = A + B + Cin;
+endmodule
+
+
+SUMADOR 8 BITS
+module M_S8 (input [7:0] A, input [7:0] B, output [8:0] C);
+wire cl;
+M_S4 sum (.A(A[3:0]), .B(B[3:0]), .Cin(1'b0), .C(cl, C[3:0]));
+M_S4 sum2 (.A(A[7:4]), .B(B[7:4]), .Cin(cl), .C(C[8:4]));
+endmodule
+
+
+TESTBENCH SUMADOR 4 BITS
+module Td_Sum4b;
+reg [3:0] A_tb, B_tb;
+reg Cin_tb;
+wire [4:0] C_tb;
+M_S4 su4 (.A(A_tb), .B(B_tb), .Cin(Cin_tb), .C(C_tb));
+initial begin
+    $monitor("Tiempo: %t  A: %d  B: %d  Cin: %d  Resultado: %d", $time, A_tb, B_tb, Cin_tb, C_tb);
+    
+    A_tb = 4'd5; B_tb = 4'd3; Cin_tb = 0; 
+    #10;
+    A_tb = 4'd10; B_tb = 4'd3; Cin_tb = 1; 
+    #10;
+    A_tb = 4'hf; B_tb = 4'hf; Cin_tb = 1; 
+    #10;
+    A_tb = 4'd2; B_tb = 4'd6; Cin_tb = 0; 
+    #10;
+    $finish;
+end
+endmodule
+
+
+TESTBENCH SUMADOR 8 BITS
+module Tb_Sum8b;
+reg [7:0] A_tb;
+reg [7:0] B_tb;
+wire [8:0] C_tb;
+M_S8 sum8 (.A(A_tb), .B(B_tb), .C(C_tb));
+initial begin
+    $monitor("A=%d | B=%d | Suma=%d", A_tb, B_tb, C_tb);
+    A_tb = 8'd0; B_tb = 8'd0; #10;
+    A_tb = 8'd100; B_tb = 8'd50; #10;
+    A_tb = 8'd15; B_tb = 8'd1; #10;
+    A_tb = 8'd24; B_tb = 8'd88; #10;
+    A_tb = 8'd34; B_tb = 8'd16; #10;
+    
+    $finish;
+end
+endmodule
