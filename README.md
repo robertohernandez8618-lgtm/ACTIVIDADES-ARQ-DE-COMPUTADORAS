@@ -14,15 +14,15 @@ Repositorio de actividades y prácticas del curso de Arquitectura de Computadora
 
 ## Estructura del repositorio
 
-### 🔧 U1 - Digitales y Verilog
+### U1 - Digitales y Verilog
 - **00 - Primera actividad en ModelSim** — introducción al entorno de simulación
 - **Actividad 02 - Compuertas Lógicas** — implementación de compuertas en Verilog (`.v`)
 
-### ➕ U2 - Operaciones Lógicas y Aritméticas
+### U2 - Operaciones Lógicas y Aritméticas
 - **Actividad 04 - Sumador Nibble y Sumador 8 bits** — diseño comportamental e instanciado
 - **SPI - Documento preparativo** — participación y fundamentos del protocolo SPI
 
-### 📡 U4 - ISA
+### U4 - ISA
 - **ISA y Endianness** — actividad sobre arquitectura de conjunto de instrucciones
 - **Asistencia SPI** — material de apoyo
 - **Avances - Implementación de Módulo SPI** — desarrollo del módulo SPI en Verilog
